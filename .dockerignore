@@ -1,0 +1,12 @@
+**/node_modules
+**/.git
+**/.cache
+**/.venv
+**/*.log
+**/tmp
+vendor
+*.md
+.idea
+.vscode
+**/*.test
+**/*_test.go
