@@ -20,6 +20,13 @@ func (s *RoomService) Update(ctx context.Context, room *models.RoomInfo) error {
 		return err
 	}
 
+	// update cache
+	if s.roomCache != nil {
+		if err := s.roomCache.SetRoom(ctx, room); err != nil {
+			log.Printf("failed to set cache for room %s: %v", room.Name, err)
+		}
+	}
+
 	if err := s.roomEventProducer.Produce(ctx, &models.RoomEvent{Name: room.Name, Content: "updated"}); err != nil {
 		log.Printf("failed to produce room updated event for %s: %v", room.Name, err)
 	}

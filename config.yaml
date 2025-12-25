@@ -9,5 +9,13 @@ database:
 kafka:
   host: "192.168.56.3"
   port: 9092
-  room_evens_topic: "rooms.events"
+  room_events_topic: "rooms.events"
   player_commands_topic: "players.commands"
+  chat_commands_topic: "chat.commands"
+
+redis:
+  host: "192.168.56.3"
+  port: 6379
+  password: ""
+  db: 0
+  ttl_seconds: 3600

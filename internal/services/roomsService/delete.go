@@ -16,6 +16,12 @@ func (s *RoomService) Delete(ctx context.Context, id string) error {
 		return err
 	}
 
+	if s.roomCache != nil {
+		if err := s.roomCache.DeleteRoom(ctx, id); err != nil {
+			log.Printf("failed to delete cache for room %s: %v", id, err)
+		}
+	}
+
 	if err := s.roomEventProducer.Produce(ctx, &models.RoomEvent{Name: id, Content: "deleted"}); err != nil {
 		log.Printf("failed to produce room deleted event for %s: %v", id, err)
 	}

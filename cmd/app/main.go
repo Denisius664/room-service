@@ -16,10 +16,14 @@ func main() {
 	}
 	roomStorage := bootstrap.InitPGStorage(cfg)
 	roomEventProducer := bootstrap.InitRoomEventsProducer(cfg)
-	roomService := bootstrap.InitRoomService(roomStorage, cfg, roomEventProducer)
+	redisCache := bootstrap.InitRedis(cfg)
+	roomService := bootstrap.InitRoomService(roomStorage, cfg, roomEventProducer, redisCache)
 
 	playerCommandProducer := bootstrap.InitPlayerCommandProducer(cfg)
 	playerService := bootstrap.InitPlayerService(playerCommandProducer)
 
-	bootstrap.AppRun(*roomService, *playerService)
+	chatCommandProducer := bootstrap.InitChatCommandProducer(cfg)
+	chatService := bootstrap.InitChatService(chatCommandProducer)
+
+	bootstrap.AppRun(*roomService, *playerService, *chatService)
 }

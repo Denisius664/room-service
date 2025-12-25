@@ -21,3 +21,7 @@ func RegisterPlayerHandler(router *chi.Mux, player *PlayerHandler) {
 	router.Post("/player/{id}/pause", player.Pause)
 	router.Post("/player/{id}/seek", player.Seek)
 }
+
+func RegisterChatHandler(router *chi.Mux, chat *ChatHandler) {
+	router.Post("/chat/send", chat.Send)
+}

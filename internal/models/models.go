@@ -18,3 +18,9 @@ type PlayerCommand struct {
 	Name    string
 	Content string
 }
+
+type SendMessageCommand struct {
+	Content string
+	Sender  string
+	ToRoom  string
+}

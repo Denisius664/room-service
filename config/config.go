@@ -10,6 +10,7 @@ import (
 type Config struct {
 	Database DatabaseConfig `yaml:"database"`
 	Kafka    KafkaConfig    `yaml:"kafka"`
+	Redis    RedisConfig    `yaml:"redis"`
 }
 
 type DatabaseConfig struct {
@@ -24,8 +25,17 @@ type DatabaseConfig struct {
 type KafkaConfig struct {
 	Host               string `yaml:"host"`
 	Port               int    `yaml:"port"`
-	RoomEventsTopic    string `yaml:"room_evens_topic"`
+	RoomEventsTopic    string `yaml:"room_events_topic"`
 	PlayerCommandTopic string `yaml:"player_commands_topic"`
+	ChatCommandTopic   string `yaml:"chat_commands_topic"`
+}
+
+type RedisConfig struct {
+	Host     string `yaml:"host"`
+	Port     int    `yaml:"port"`
+	Password string `yaml:"password"`
+	DB       int    `yaml:"db"`
+	TTLSec   int    `yaml:"ttl_seconds"`
 }
 
 func LoadConfig(filename string) (*Config, error) {
